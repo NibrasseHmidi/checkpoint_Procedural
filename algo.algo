@@ -1,0 +1,82 @@
+
+//****************************pro************************//
+PROCEDURE dot_product(n:INTEGER , VAR V1,V2:ARRAY_OF FLOAT )
+VAR
+    i:INTEGER;
+    ps: FLOAT =0.0;
+    
+BEGIN
+/*Saisie des données*/
+     Write("First tab length");
+    Read(n);
+    FOR i FROM 0 TO n-1 STEP 1  DO
+        Read (V1[i]);
+    END_FOR
+FOR i FROM 0 TO n-1 STEP 1  DO
+        Read (V2[i]);
+    END_FOR
+
+    /*calcul du produit scalaire*/
+
+    FOR ps FROM 0 TO n-1 STEP 1 DO
+    ps := ps +V1[i]*V2[i];
+    END_FOR
+      Write("The product of v1 and v2 is : ", ps); 
+END
+//***********************algo************************//
+ALGORITHM orthogonal_vectors
+VAR
+    V1,V2:ARRAY_OF FLOAT;
+    ps:FLOAT =0.0;
+BEGIN
+dot_product(V1,V2,ps);
+   IF (ps=0.0) THEN
+      Write("V1 and V2 are orthogonal");
+   ELSE
+       
+        Write("V1 and V2 are not orthogonal");
+   END_IF
+END
+
+//*********************************func******************//
+
+
+
+FUNCTION dot_product(V1,V2 : ARRAY_OF FLOAT) : FLOAT
+VAR
+    i : INTEGER;
+    ps: FLOAT =0.0;
+BEGIN
+    ps :=0.0;
+    i:=0;
+    IF (V1.length <> V2.length) THEN
+        Write("vectors with different sizes we cannot calculat ps product");
+        RETURN NaN; // NaN : not definte number
+    END_IF
+    WHILE (i <V1.length ) DO
+        ps := ps + V1[i]*V2[i];
+    END_WHILE
+    RETURN ps ;
+END
+//************************algo*********************//
+ALGORITHM orth_vectors
+VAR
+    V1,V2 : ARRAY_OF FLOAT;
+    ps : FLOAT = 0.0;
+BEGIN
+    // Read Size of elements of V1 
+    n1 := read_size();
+    // Read elements of V1
+    read_array(n1,v1);
+    // Read Size of elements of V2 
+    n2 := read_size();
+    // Read elements of V2
+    read_array(n2,v2);
+
+    ps := ps_product(V1,V2);
+    IF (ps = 0.0) THEN
+        Write("V1 and V2 are orthogonal");
+    ELSE
+        Write("V1 and V2 are not orthogonal");
+    END_IF
+END
